@@ -5,6 +5,7 @@ import BookItem from "@/components/book-item";
 import fetchBooks from "@/lib/fetch-books";
 import { InferGetStaticPropsType } from "next";
 import fetchRandomBooks from "@/lib/fetch-random-books";
+import Head from "next/head";
 
 export const getStaticProps = async () => {
   // const allBooks = await fetchBooks();
@@ -30,7 +31,15 @@ export default function Home({
   recoBooks,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <div className={styles.container}>
+      <>
+        <Head>
+          <title>한입북스</title>
+            <meta property="og:image" content={"/thumbnail.png"}/>
+            <meta property-="og:title" content={'한입북스'}/>
+            <meta property="og:description" content="한입 북스에 등록된 도서들을 만나보세요"/>
+            
+        </Head>
+      <div className={styles.container}>
       <section>
         <h3>지금 추천하는 도서</h3>
         {recoBooks.map((book) => (
@@ -44,6 +53,7 @@ export default function Home({
         ))}
       </section>
     </div>
+      </>
   );
 }
 
